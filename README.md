@@ -1,5 +1,5 @@
 # quick-k8s
-Faster aliases and commands for k8s.
+Aliases and commands for faster k8s experience.
 
 ### Aliases:
 - ```k``` -> kubectl
