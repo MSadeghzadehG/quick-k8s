@@ -3,6 +3,7 @@ Faster aliases and commands for k8s.
 
 ### Aliases:
 - ```k``` -> kubectl
+- ```kd``` -> kubectl describe
 - ```kswitch``` -> kubectl config use-context
 
 ### Commands:

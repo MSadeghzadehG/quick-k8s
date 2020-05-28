@@ -2,8 +2,14 @@
 
 # Kubectl client aliases for faster experience
 
+# aliases
+
 alias k="kubectl"
+alias kd="kubectl describe"
 alias kswitch='kubectl config use-context'
+
+
+# Inner functions
 
 _get_matched_names () {
     local match_name=$1
@@ -21,6 +27,9 @@ _get_random_number () {
     local limit_num=$1
     SELECTED_POD_NUM=$(( ( RANDOM % $limit_num ) + 1 ))
 }
+
+
+# Commnads
 
 function ke () {
     ALL_PODS=($(kubectl get pods --output=jsonpath='{.items[*].metadata.name}'))
