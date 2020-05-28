@@ -56,3 +56,14 @@ ke () {
     kubectl exec -it "${SELECTED_PODS[$SELECTED_POD_NUM]}" bash
 }
 
+klogs () {
+    _select_pods_by_name $1
+    shift
+    for pod in $SELECTED_PODS; do
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
+        echo "\\n\\n\\n====================== $pod =========================\\n\\n\\n"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
+        kubectl logs "$pod" $* --follow=false;
+    done
+}
+
