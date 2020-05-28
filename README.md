@@ -3,7 +3,7 @@ Faster aliases and commands for k8s.
 
 ### Aliases:
 - ```k``` -> kubectl
-- ```kswitch``` -> kubectl cibfug use-context
+- ```kswitch``` -> kubectl config use-context
 
 ### Commands:
 - ```ke <pod>```:
