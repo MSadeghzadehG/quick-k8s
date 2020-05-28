@@ -5,7 +5,7 @@ Aliases and commands for faster k8s experience.
 If you are using oh-my-zsh, You should just clone the repository and symlink your ```quick-k8s.sh``` file in the custom dir with ```.zsh``` extension. e.g.
 
 ```
-ln -s quick-k8s.sh ~/.oh-my-zsh/custom/quick-k8s.zsh
+ln -s /<path-to-repo>/quick-k8s.sh ~/.oh-my-zsh/custom/quick-k8s.zsh
 ```
 
 ### Aliases:
