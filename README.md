@@ -14,7 +14,11 @@ ln -s /<path-to-repo>/quick-k8s.sh ~/.oh-my-zsh/custom/quick-k8s.zsh
 - ```kswitch``` -> kubectl config use-context
 
 ### Commands:
-- ```ke <pod/pods-name-pattern>```:
+
+- ```ke <pod/pods-name-pattern>```
+
 filter the pods that have names starts with input pattern and selects one of them randomly. then get the shell of selected pod using ```kubectl exec -it <selected pod> bash```.
-- ```klogs <pods-name-pattern> [ any-kubectl-logs-param/option ]```:
+
+- ```klogs <pods-name-pattern> [ any kubectl logs param/option ]```
+
 filter the pods that have name starts with input pattern and print the logs of them separated using ```kubectl logs <pod> $* --follow=false```.
