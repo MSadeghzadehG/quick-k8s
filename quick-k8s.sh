@@ -38,6 +38,6 @@ function ke () {
     local number_of_selected_pods=${#SELECTED_PODS[@]}
     SELECTED_POD_NUM=1
     _get_random_number $number_of_selected_pods
-    echo "${SELECTED_PODS[$SELECTED_POD_NUM]}" 
+    echo "Selected pod: ${SELECTED_PODS[$SELECTED_POD_NUM]}" 
     kubectl exec -it "${SELECTED_PODS[$SELECTED_POD_NUM]}" bash
 }
