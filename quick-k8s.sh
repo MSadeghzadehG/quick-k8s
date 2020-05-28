@@ -11,10 +11,10 @@ alias kswitch='kubectl config use-context'
 
 # Global variables
 
-ALL_PODS=()
+K_GET_NAMES=()
 SELECTED_PODS=()
 SELECTED_POD_NUM=1
-
+K8S_BACKUP_DIR=~/.k8s_backups
 
 # Inner functions
 
@@ -37,10 +37,16 @@ _get_random_number () {
     SELECTED_POD_NUM=$(( ( RANDOM % $limit_num ) + 1 ))
 }
 
+_get_type_names_list () {
+    local k_type
+    k_type=$1
+    K_GET_NAMES=($(kubectl get "$k_type" --output=jsonpath='{.items[*].metadata.name}'))
+}
+
 _select_pods_by_name () {
-    ALL_PODS=($(kubectl get pods --output=jsonpath='{.items[*].metadata.name}'))
+    _get_type_names_list pods
     SELECTED_PODS=()
-    _get_matched_names $1 $ALL_PODS
+    _get_matched_names $1 $K_GET_NAMES
 }
 
 
@@ -67,3 +73,18 @@ klogs () {
     done
 }
 
+kbackup () {
+    local k_type date dir output_format file_name
+    k_type=$1
+    output_format=${2:=yaml}
+    date=$(date '+%Y-%m-%d')
+    dir="$K8S_BACKUP_DIR/$date-$k_type"
+    mkdir -p $K8S_BACKUP_DIR $dir
+    _get_type_names_list $k_type
+    for name in $K_GET_NAMES; do
+        file_name="$dir/$name.backup"
+	kubectl get "$k_type" "$name" -o "$output_format" >> "$file_name"  
+	echo "$name Done."
+    done
+    echo "The backup procedure was done successfully."
+}

@@ -17,8 +17,16 @@ ln -s /<path-to-repo>/quick-k8s.sh ~/.oh-my-zsh/custom/quick-k8s.zsh
 
 - ```ke <pod/pods-name-pattern>```
 
-filter the pods that have names starts with input pattern and selects one of them randomly. then get the shell of selected pod using ```kubectl exec -it <selected pod> bash```.
+Filter the pods that have names starts with input pattern and selects one of them randomly. then get the shell of selected pod using ```kubectl exec -it <selected pod> bash```.
 
 - ```klogs <pods-name-pattern> [ any kubectl logs param/option ]```
 
-filter the pods that have name starts with input pattern and print the logs of them separated using ```kubectl logs <pod> $* --follow=false```.
+Filter the pods that have name starts with input pattern and print the logs of them separated using ```kubectl logs <pod> $* --follow=false```.
+
+- ```kbackup <resource type> <output format{default=yaml}>```
+
+Create backup of given resource in ```K8S_BACKUP_DIR{default=~/.k8s_backups}``` with given format. e.g.
+
+```~/.k8s_backups/<date>-<resource type>/<name>.backup```
+
+```~/.k8s_backups/2020-05-29-secret/secret1.backup```   
