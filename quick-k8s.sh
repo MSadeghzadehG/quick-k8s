@@ -9,12 +9,20 @@ alias kd="kubectl describe"
 alias kswitch='kubectl config use-context'
 
 
+# Global variables
+
+ALL_PODS=()
+SELECTED_PODS=()
+SELECTED_POD_NUM=1
+
+
 # Inner functions
 
 _get_matched_names () {
-    local match_name=$1
+    local names match_name
+    match_name=$1
     shift;
-    local names=("$@")
+    names=("$@")
     SELECTED_PODS=()
     for name in $names; do
 	if [[ ${name} == ${match_name}* ]]; then
@@ -24,20 +32,27 @@ _get_matched_names () {
 }
 
 _get_random_number () {
-    local limit_num=$1
+    local limit_num 
+    limit_num=$1
     SELECTED_POD_NUM=$(( ( RANDOM % $limit_num ) + 1 ))
+}
+
+_select_pods_by_name () {
+    ALL_PODS=($(kubectl get pods --output=jsonpath='{.items[*].metadata.name}'))
+    SELECTED_PODS=()
+    _get_matched_names $1 $ALL_PODS
 }
 
 
 # Commnads
 
-function ke () {
-    ALL_PODS=($(kubectl get pods --output=jsonpath='{.items[*].metadata.name}'))
-    SELECTED_PODS=()
-    _get_matched_names $1 $ALL_PODS 
-    local number_of_selected_pods=${#SELECTED_PODS[@]}
+ke () {
+    _select_pods_by_name $1
+    local number_of_selected_pods
+    number_of_selected_pods=${#SELECTED_PODS[@]}
     SELECTED_POD_NUM=1
     _get_random_number $number_of_selected_pods
     echo "Selected pod: ${SELECTED_PODS[$SELECTED_POD_NUM]}" 
     kubectl exec -it "${SELECTED_PODS[$SELECTED_POD_NUM]}" bash
 }
+
