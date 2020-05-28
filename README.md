@@ -8,4 +8,4 @@ Faster aliases and commands for k8s.
 
 ### Commands:
 - ```ke <pod>```:
-filter the pods that have names starts with ```<pod>``` and selects one of them randomly.
+filter the pods that have names starts with ```<pod>``` and selects one of them randomly. then get the shell of selected pod using ```kubectl exec -it <selected pod> bash```.
