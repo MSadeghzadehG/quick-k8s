@@ -17,10 +17,18 @@ _get_matched_names () {
     done
 }
 
+_get_random_number () {
+    local limit_num=$1
+    SELECTED_POD_NUM=$(( ( RANDOM % $limit_num ) + 1 ))
+}
+
 function ke () {
-    #kubectl exec -it "$1" bash
     ALL_PODS=($(kubectl get pods --output=jsonpath='{.items[*].metadata.name}'))
     SELECTED_PODS=()
     _get_matched_names $1 $ALL_PODS 
-    echo $SELECTED_PODS
+    local number_of_selected_pods=${#SELECTED_PODS[@]}
+    SELECTED_POD_NUM=1
+    _get_random_number $number_of_selected_pods
+    echo "${SELECTED_PODS[$SELECTED_POD_NUM]}" 
+    kubectl exec -it "${SELECTED_PODS[$SELECTED_POD_NUM]}" bash
 }
