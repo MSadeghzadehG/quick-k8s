@@ -15,6 +15,7 @@ K_GET_NAMES=()
 SELECTED_PODS=()
 SELECTED_POD_NUM=1
 K8S_BACKUP_DIR=~/.k8s_backups
+COMMANDS=(ke klogs kbackup)
 
 # Inner functions
 
@@ -47,6 +48,29 @@ _select_pods_by_name () {
     _get_type_names_list pods
     SELECTED_PODS=()
     _get_matched_names $1 $K_GET_NAMES
+}
+
+_complete_function () {
+    local cmd out cur
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    cmd="${1##*/}"
+    case "$cmd" in
+    ke | klogs)
+	_get_type_names_list pods
+    	out=("${K_GET_NAMES[@]}")
+	;;
+    kbackup)
+	case "$COMP_CWORD" in
+	1)
+	    out=($(kubectl api-resources --output=name))
+	    ;;
+        2)        
+	    out=(json yaml wide custom)
+	    ;;
+	esac
+	;;
+    esac
+    COMPREPLY=("${out[@]}")
 }
 
 
@@ -88,3 +112,7 @@ kbackup () {
     done
     echo "The backup procedure was done successfully."
 }
+
+for name in $COMMANDS; do
+    complete -F _complete_function "$name"
+done
