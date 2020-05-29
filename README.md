@@ -1,6 +1,7 @@
 # quick-k8s
 Aliases and commands for faster k8s use.
 
+NEW: Auto-complete!
 
 ### How to Use
 If you are using oh-my-zsh, You should just clone the repository and symlink your ```quick-k8s.sh``` file in the custom dir with ```.zsh``` extension. e.g.
