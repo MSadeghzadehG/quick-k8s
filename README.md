@@ -1,6 +1,8 @@
 # quick-k8s
 Aliases and commands for faster k8s use.
 
+Feel free to fork and create your own. And making PR is also welcome.
+
 NEW: Auto-complete!
 
 ### How to Use
@@ -20,7 +22,7 @@ ln -s /<path-to-repo>/quick-k8s.sh ~/.oh-my-zsh/custom/quick-k8s.zsh
 - #### ke: kubectl exec easy
 ```ke <pod/pods-name-pattern>```
 
-Filter the pods that have names starts with input pattern and selects one of them randomly. then get the shell of selected pod using ```kubectl exec -it <selected pod> bash```.
+Filter the pods that have names starts with input pattern and selects one of them randomly. then get the shell of the selected pod using ```kubectl exec -it <selected pod> bash```.
 
 - #### klogs: see logs of pods using just one command
 ```klogs <pods-name-pattern> [ any kubectl logs param/option ]```
