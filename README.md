@@ -1,7 +1,7 @@
 # quick-k8s
-Considerable shortcut commands for using kubectl faster and easier.
+Some shortcut commands for using kubectl faster and easier. I've found these commands useful in my experiences with k8s, I hope it will be for ohters too.
 
-Feel free to fork and create your own. And making PR is also welcome.
+Feel free to fork and create your own. making PRs is also welcome.
 
 NEW: Auto-complete on commands!
 
